@@ -1,0 +1,3 @@
+[submodule "ext/mistral"]
+	path = ext/mistral
+	url = git@github.com:Anonymous-Stranger/mistral-smt.git
