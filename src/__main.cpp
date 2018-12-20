@@ -5,9 +5,26 @@
 
 void hello_mistral();
 void hello_abduction();
+void guards_demo();
 
 
-int main(int argc, char* argv[]) { hello_abduction(); }
+int main(int argc, char* argv[]) { guards_demo(); }
+
+
+void guards_demo() {
+  Term* sg = VariableTerm::make("sg");
+  Term* sr = VariableTerm::make("sr");
+  Term* n = VariableTerm::make("n");
+
+  Constraint conclusion {sg, n, ATOM_GEQ};
+  Constraint guard_l {sr, n, ATOM_GEQ};
+
+  map<Term*, int> costs {{sg, 0}, {sr, 0}};
+
+  Constraint guard_g = conclusion.abduce(guard_l, set<Constraint>{}, costs);
+
+  cout << guard_g << " & " << guard_l << " => " << conclusion << endl;
+}
 
 
 void hello_abduction() {
